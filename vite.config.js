@@ -1,0 +1,2 @@
+import {defineConfig} from 'vite';
+export default defineConfig({plugins:[{name:'g5-local-api',configureServer(server){server.middlewares.use('/api',async(req,res)=>{const {handleApi}=await import('./functions/api.mjs');const u=new URL(req.url,'http://localhost');req.path=u.pathname;req.query=Object.fromEntries(u.searchParams);res.status=n=>(res.statusCode=n,res);res.set=(k,v)=>(res.setHeader(k,v),res);res.json=data=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(data));};await handleApi(req,res);});}}]});

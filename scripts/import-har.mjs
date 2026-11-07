@@ -1,0 +1,5 @@
+import fs from 'node:fs';
+import {parseCatalog} from '../functions/catalog.mjs';
+const har=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));const entry=har.log.entries.find(e=>e.response.content.mimeType==='text/html'&&e.request.url.includes('/product-category/'));const c=entry.response.content;const html=c.encoding==='base64'?Buffer.from(c.text,'base64').toString():c.text;const data=parseCatalog(html);
+for(const [i,p] of data.products.entries()){const e=har.log.entries.find(e=>e.request.url.replace(/-\d+x\d+(?=\.)/,'')===p.image.replace(/-\d+x\d+(?=\.)/,'')&&e.response.content.text);if(e){const c=e.response.content;const ext=c.mimeType.includes('png')?'png':c.mimeType.includes('webp')?'webp':'jpg';const path=`/assets/g5-${i}.${ext}`;fs.writeFileSync('public'+path,c.encoding==='base64'?Buffer.from(c.text,'base64'):c.text);p.image=path;}}
+fs.writeFileSync('public/data/catalog.json',JSON.stringify({...data,source:'snapshot',category:'/product-category/air-jordan/',capturedAt:entry.startedDateTime},null,2));console.log('Importados',data.products.length,'productos y',data.categories.length,'categorías; sin cookies ni sesiones.');
