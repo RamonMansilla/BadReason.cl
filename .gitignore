@@ -3,3 +3,5 @@ dist/
 .firebase/
 *.har
 .env*
+
+.wrangler/
