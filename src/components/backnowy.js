@@ -55,7 +55,7 @@ export function mountBacknowy({ onBack, label = 'Back!', color = '#ff5a1f' } = {
       liveText.textContent = label;
       liveText.setAttribute('role', 'status');
     }
-    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     removeTooltipTimer = window.setTimeout(() => button.classList.remove('backnowy--activated'), 1400);
   }
 
@@ -73,3 +73,4 @@ export function mountBacknowy({ onBack, label = 'Back!', color = '#ff5a1f' } = {
     button.remove();
   };
 }
+
