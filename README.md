@@ -1,5 +1,9 @@
 # Badreason
 
+- [Continuar desde el celular](CONTINUAR.md)
+- [Publicar en badreason.cl](DESPLIEGUE.md)
+- [Configurar pagos](PAYMENTS.md)
+
 Tienda de sneakers Badreason: interfaz basada en la ficha de Moredrops y catálogo consultado en G5. El sitio y su API se publican juntos como Cloudflare Worker con assets estáticos. Firebase ya no hace falta para este despliegue ni se requieren Cloud Functions.
 
 ## Desarrollo
@@ -35,7 +39,7 @@ Cloudflare publica primero en su dominio `workers.dev`; los cambios siguientes e
 
 ## Dominio badreason.cl
 
-Para servir en `www.badreason.cl` o `badreason.cl` desde Workers, el dominio debe estar activo como una zona de Cloudflare y el Worker debe vincularse a un hostname personalizado. La zona actual aún apunta a Firebase. No se han modificado DNS, nameservers ni certificados. No cambies los nameservers sin revisar y copiar antes todos los registros DNS existentes, incluidos correo y verificaciones. Valida primero la dirección `workers.dev`; conecta el dominio después desde **Workers & Pages > badreason > Settings > Domains & Routes > Add > Custom Domain**.
+Para servir en `www.badreason.cl` o `badreason.cl` desde Workers, el dominio debe estar activo como una zona de Cloudflare y el Worker debe vincularse a un hostname personalizado. El dominio ya sirve la versión publicada del Worker; se verificaron badreason.cl y www.badreason.cl el 8 de noviembre de 2026. No cambies los nameservers sin revisar y copiar antes todos los registros DNS existentes, incluidos correo y verificaciones. Valida primero la dirección `workers.dev`; conecta el dominio después desde **Workers & Pages > badreason > Settings > Domains & Routes > Add > Custom Domain**.
 
 ## API y precios
 
