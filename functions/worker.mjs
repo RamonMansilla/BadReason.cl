@@ -1,5 +1,8 @@
 import { getExchangeRate } from './pricing.mjs';
 import { parseCatalog, parseProduct } from './catalog.mjs';
+import { payments } from './payments.mjs';
+import { getBestsellers } from './bestsellers.mjs';
+import { getCollection,productImage } from './collections.mjs';
 
 const origin = 'https://www.g5sneaker.ru';
 const jsonHeaders = {
@@ -19,6 +22,12 @@ async function api(request) {
   let product = false;
 
   if (request.method !== 'GET') return json({ error: 'Método no permitido' }, 405);
+  if(path==='/product-image')return productImage(request);
+  if(path==='/collection'){try{return json(await getCollection(url.searchParams.get('group'),url.searchParams.get('kind')||'shoes',url.searchParams.get('page')));}catch(e){return json({error:e.status?e.message:'No se pudo consultar esta colección de G5.'},e.status||502);}}
+  if (path === '/bestsellers') {
+    try { return json(await getBestsellers()); }
+    catch { return json({ error: 'No se pudieron consultar los más vendidos de G5.' }, 502); }
+  }
 
   if (path === '/catalog') {
     const category = url.searchParams.get('category') || '/product-category/air-jordan/';
@@ -61,6 +70,7 @@ async function api(request) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname.startsWith('/api/payments/')) return payments(request, env);
     if (url.pathname.startsWith('/api/')) return api(request);
     return env.ASSETS.fetch(request);
   },

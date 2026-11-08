@@ -5,3 +5,5 @@ dist/
 .env*
 
 .wrangler/
+!/.env.example
+.payments/

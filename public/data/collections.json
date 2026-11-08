@@ -1,0 +1,71 @@
+[
+  {
+    "id": "futbol",
+    "name": "Fútbol",
+    "tagline": "TU CANCHA. TUS REGLAS.",
+    "description": "Botines, turf y fútbol sala.",
+    "path": "/product-category/soccer-shoes/",
+    "prefixes": [
+      "/product-category/soccer-shoes/"
+    ],
+    "clothingSearch": "soccer jersey",
+    "clothingPattern": "soccer|football|futbol|real madrid|barcelona|arsenal|manchester|psg|liverpool|chelsea|juventus|inter miami",
+    "accent": "#c7f347"
+  },
+  {
+    "id": "kids",
+    "name": "Kids",
+    "tagline": "PEQUEÑOS PIES. GRANDES PASOS.",
+    "description": "Zapatillas y estilo para los más pequeños.",
+    "path": "/product-category/childrens-shoes/",
+    "prefixes": [
+      "/product-category/childrens-shoes/"
+    ],
+    "clothingSearch": "kids clothes",
+    "clothingPattern": "kids|child|junior|youth|baby",
+    "accent": "#c2a2ff"
+  },
+  {
+    "id": "urbano",
+    "name": "Urbano",
+    "tagline": "LA CALLE ES TUYA.",
+    "description": "Sneakers y ropa para todos los días.",
+    "path": "/product-category/nike-shoes/air-force-1/",
+    "prefixes": [
+      "/product-category/nike-shoes/",
+      "/product-category/air-jordan/",
+      "/product-category/adidas/",
+      "/product-category/new-balance/",
+      "/product-category/brand-shoe/"
+    ],
+    "clothingPath": "/product-category/clothes/",
+    "accent": "#ffb78d"
+  },
+  {
+    "id": "running",
+    "name": "Running",
+    "tagline": "ENCUENTRA TU SIGUIENTE RITMO.",
+    "description": "Modelos para correr y ropa deportiva.",
+    "path": "/product-category/nike-shoes/nike-pegasus-42/",
+    "prefixes": [
+      "/product-category/on-shoes/"
+    ],
+    "pattern": "pegasus|vomero|revolution|structure|fuelcell|running|cloudrunner|cloudmonster|cloudsurfer",
+    "clothingPath": "/product-category/on-clothes/",
+    "accent": "#8fe0ee"
+  },
+  {
+    "id": "basquet",
+    "name": "Básquet",
+    "tagline": "ELEVA TU JUEGO.",
+    "description": "Zapatillas de básquet dentro y fuera de la cancha.",
+    "path": "/product-category/nba/",
+    "prefixes": [
+      "/product-category/nba/"
+    ],
+    "pattern": "basketball|lebron|hyperdunk|kobe|kd-|curry|harden|luka|ja-morant",
+    "clothingSearch": "basketball jersey",
+    "clothingPattern": "basketball|nba|lakers|bulls|celtics",
+    "accent": "#ffce65"
+  }
+]

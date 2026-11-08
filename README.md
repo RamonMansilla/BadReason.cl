@@ -47,10 +47,20 @@ La respuesta de G5 puede cambiar de estructura. Si G5 o el proveedor de tipo de 
 
 ## Compras
 
-El carrito guarda una selección en este navegador. El pago, pedidos en servidor, cuentas e información de despacho aún no están configurados. El botón de descarga exporta una selección, no una compra.
+El carrito guarda una selección en este navegador. El checkout está en /pago; su activación y límites se detallan en PAYMENTS.md. El botón de descarga exporta una selección, no una compra.
 
 ## Fuentes y alcance
 
 El HAR de Moredrops contiene una ficha Air Max 95 y el HAR de G5 una categoría Air Jordan, no todas las páginas de esas tiendas. La página usa la ficha y las categorías capturadas como referencias; los precios y datos actuales se consultan en G5.
 
 Cloudflare documenta el despliegue Git en [Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/), los assets para SPA en [Static Assets](https://developers.cloudflare.com/workers/static-assets/) y los requisitos de dominio en [Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
+
+## Pagos
+
+Checkout en /pago: Mercado Pago, PayPal y transferencia, con pedidos persistentes y notificaciones verificadas. Consulta [PAYMENTS.md](PAYMENTS.md) para configuración, pruebas, comisiones y límites. Sin credenciales los pagos permanecen deshabilitados.
+
+## Categorías y carrusel
+
+La navegación agrupa Fútbol, Kids, Urbano, Running y Básquet. `public/data/collections.json` mantiene las fuentes de G5 y separa calzado y ropa; `public/data/categories.json` conserva las categorías verificadas del proveedor. Cada grupo tiene rutas `/coleccion/:grupo?kind=shoes` y `?kind=clothing`. Las búsquedas de ropa se filtran por actividad y tipo de prenda; si la búsqueda de G5 falla, se intenta su selección de ropa y se informa si no hay coincidencias, sin usar productos de adultos para rellenar Kids.
+
+El banner principal se configura en `public/data/hero-slides.json`: una selección editorial de 30 modelos con marca, inspirada en Best Sellers de G5 y clásicos conocidos. Los PNG son ilustraciones generadas de esos modelos, no fotografías oficiales ni un ranking global de ventas. Se guardan en `public/assets/hero/icons/`. Un solo reloj cambia el texto, el nombre y la imagen cada 6,5 segundos después de decodificar el PNG; mantiene solo dos imágenes en el DOM y precarga la siguiente. No hay precios, controles ni enlaces en las imágenes. Se detiene al salir de la portada, al ocultar la pestaña o al activar movimiento reducido. Los diseños sin marca se retiraron. La navegación y las fichas conservan sus datos de G5.
