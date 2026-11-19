@@ -63,13 +63,30 @@ export async function payments(request,env){try{
  if(path==='/api/payments/quote'){
   if(!config.shippingConfigured||!Number.isInteger(Number(env.SHIPPING_CLP))||Number(env.SHIPPING_CLP)<0)fail('El comercio debe configurar el despacho antes de cobrar.',503);
   const fx=await getExchangeRate();if(fx.fallback)fail('No se pudo confirmar el tipo de cambio actual.',503);
-  const items=await quoteItems(body.items,async id=>{const r=await fetch('https://www.g5sneaker.ru/product/'+id+'/',{redirect:'error',signal:AbortSignal.timeout(15000)});if(!r.ok)fail('Proveedor no disponible',502);return parseProduct(await r.text(),r.url,fx);});
+  const items=await quoteItems(body.items,async id=>{
+   const target='https://www.g5sneaker.ru/product/'+id+'/';
+   try{
+    const response=await fetch(target,{
+     signal:AbortSignal.timeout(20000),
+     headers:{'User-Agent':'BadreasonCatalog/1.0'},
+     redirect:'manual'
+    });
+    if(!response.ok)throw Error('G5 unavailable');
+    return parseProduct(await response.text(),target,fx);
+   }catch{
+    fail('No se pudo confirmar el producto con G5.',502);
+   }
+  });
   const subtotal=items.reduce((sum,item)=>sum+item.price*item.qty,0);
   const shipping=subtotal>50000?0:Number(env.SHIPPING_CLP);
   const total=subtotal+shipping;
   if(!Number.isSafeInteger(total)||total>10000000)fail('Total fuera de rango.');
   const quote={id:crypto.randomUUID(),items,total,shipping,usd:(total/fx.rate).toFixed(2),expires:Date.now()+30*60*1000};
-  await saveQuote(env.PAYMENTS_DB,quote);
+  try{
+   await saveQuote(env.PAYMENTS_DB,quote);
+  }catch{
+   fail('No se pudo guardar el pedido. Intenta nuevamente.',503);
+  }
   return reply({quote,token:await sign(quote,env.PAYMENT_SECRET)});
  }
  const q=await verify(body.token,env.PAYMENT_SECRET);
