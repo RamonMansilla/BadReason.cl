@@ -5,7 +5,7 @@
 1. Copia `.env.example` a `.env.local`.
 2. Genera una clave: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`. Guárdala en `PAYMENT_SECRET`.
 3. Mantén `PAYMENT_MODE=sandbox`. Configura el token de prueba de Mercado Pago o las credenciales sandbox de PayPal.
-4. Define `SHIPPING_CLP`: costo final de despacho que cobrará la tienda. `0` significa envío gratis. Un valor vacío bloquea los pagos.
+4. Conserva `SHIPPING_CLP=6000` para cobrar $6.000 CLP en subtotales de hasta $50.000 CLP inclusive. Sobre $50.000 CLP, el despacho es gratis. Un valor vacío bloquea los pagos.
 5. Ejecuta `npm run dev`. Abre la URL que imprime Vite y visita `/pago`.
 
 Vite guarda los pedidos en `.payments/orders.sqlite`. No se publica esa carpeta ni se guardan números de tarjeta, CVV o contraseñas bancarias. El catálogo, las tallas y el tipo de cambio se consultan nuevamente antes de cotizar; si no se pueden confirmar, se bloquea el cobro. La cotización dura 30 minutos. PayPal cobra en USD, con conversión explícita antes de continuar.
