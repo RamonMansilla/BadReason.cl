@@ -118,6 +118,18 @@ test('almacén local agrega columnas nuevas a archivos antiguos y la migración 
  }finally{rmSync(folder,{recursive:true,force:true});}
 });
 
+test('una base D1 solo con la migración 0001 recibe las columnas nuevas al primer uso',async()=>{
+ const {DatabaseSync}=await import('node:sqlite');const raw=new DatabaseSync(':memory:');raw.exec(fs.readFileSync('migrations/0001_payments.sql','utf8'));
+ // Envoltorio con la misma forma que D1, sin la migración automática del almacén local.
+ const d1={prepare(sql){return {bind(...v){const st=raw.prepare(sql);return {first:async()=>st.get(...v)||null,run:async()=>st.run(...v),all:async()=>({results:st.all(...v)})};},all:async()=>({results:raw.prepare(sql).all()}),run:async()=>raw.prepare(sql).run()};}};
+ resetRateLimits();const original=globalThis.fetch;
+ try{globalThis.fetch=fakeNetwork();
+  const r=await payments(post('quote',{items:[{id:'modelo',qty:1,options:['40']}],customer,acceptTerms:true}),{PAYMENTS_DB:d1,PAYMENT_SECRET:secret,SHIPPING_CLP:'6000'});
+  assert.equal(r.status,200);const {quote}=await r.json();
+  assert.equal(JSON.parse(raw.prepare('SELECT customer FROM payment_orders WHERE id=?').get(quote.id).customer).commune,'Ñuñoa');
+ }finally{globalThis.fetch=original;raw.close();resetRateLimits();}
+});
+
 test('Worker agrega cabeceras de seguridad y limita la API',async()=>{
  resetRateLimits();const env={ASSETS:{fetch:async()=>new Response('ok')}};
  const r=await worker.fetch(new Request('http://localhost/api/nada'),env,{});assert.equal(r.status,404);

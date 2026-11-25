@@ -1,6 +1,6 @@
 import {parseProduct} from './catalog.mjs';
 import {getExchangeRate} from './pricing.mjs';
-import {saveQuote,getOrder,updateOrder,markPaid,claimProvider,recordEvent,setStatusUnlessPaid} from './orders.mjs';
+import {saveQuote,getOrder,updateOrder,markPaid,claimProvider,recordEvent,setStatusUnlessPaid,ensureSchema} from './orders.mjs';
 import {validateCustomer,TERMS_VERSION} from './customer.mjs';
 import {notifyOrder,mailConfigured} from './notify.mjs';
 import {rateLimit} from './ratelimit.mjs';
@@ -80,7 +80,7 @@ async function webhook(request,env,ctx){
 export async function quoteItems(items,load){if(!Array.isArray(items)||!items.length||items.length>10)fail('Selecciona entre 1 y 10 productos.');const seen=new Set();return Promise.all(items.map(async item=>{if(!/^[a-z0-9-]{1,180}$/.test(item.id)||!Number.isInteger(item.qty)||item.qty<1||item.qty>10||!Array.isArray(item.options))fail('Producto o cantidad inválidos.');const identity=item.id+JSON.stringify(item.options);if(seen.has(identity))fail('Producto duplicado.');seen.add(identity);const p=await load(item.id);if(!p.inStock||!Number.isSafeInteger(p.price)||p.price<=0)fail('Precio o disponibilidad sin confirmar.',409);if(item.options.length!==p.options.length||p.options.some((o,i)=>!o.values.some(v=>v.value===item.options[i])))fail('Selecciona una talla válida.',409);return {id:p.id,name:p.name,qty:item.qty,options:item.options,price:p.price,priceUsd:p.priceUsd};}));}
 export async function payments(request,env,ctx){try{
  const url=new URL(request.url),path=url.pathname;const config=paymentConfig(env);
- if(path.startsWith('/api/payments/webhooks/'))return await webhook(request,env,ctx);
+ if(path.startsWith('/api/payments/webhooks/')){if(env.PAYMENTS_DB)await ensureSchema(env.PAYMENTS_DB);return await webhook(request,env,ctx);}
  if(path==='/api/payments/config'&&request.method==='GET')return reply(config);
  if(request.method!=='POST')return reply({error:'Método no permitido'},405);
  if(request.headers.get('Origin')!==url.origin)return reply({error:'Origen no permitido'},403);
@@ -90,6 +90,7 @@ export async function payments(request,env,ctx){try{
  let body;try{body=JSON.parse(raw);}catch{return reply({error:'JSON inválido'},400);}
  if(!env.PAYMENT_SECRET||env.PAYMENT_SECRET.length<32)fail('Falta configurar la clave privada de pagos.',503);
  if(!env.PAYMENTS_DB)fail('Falta configurar el almacenamiento de pedidos.',503);
+ try{await ensureSchema(env.PAYMENTS_DB);}catch{fail('No se pudo preparar el almacenamiento de pedidos.',503);}
  const origin=env.PUBLIC_ORIGIN||url.origin;if(new URL(origin).origin!==url.origin)fail('Origen de tienda incorrecto.',503);
  if(path==='/api/payments/quote'){
   if(!config.shippingConfigured||!Number.isInteger(Number(env.SHIPPING_CLP))||Number(env.SHIPPING_CLP)<0)fail('El comercio debe configurar el despacho antes de cobrar.',503);

@@ -7,6 +7,25 @@ export const orderSchema=`CREATE TABLE IF NOT EXISTS payment_orders (
 // Columnas agregadas después de la primera migración. El almacén local las agrega a archivos antiguos.
 export const lateColumns=['customer','last_event','notified'];
 const now=()=>new Date().toISOString();
+// Agrega en D1 las columnas que falten (equivale a migrations/0002) la primera vez que se usa la base
+// en cada instancia del Worker. Así un despliegue no depende de aplicar la migración a mano antes.
+const schemaChecks=new WeakMap();
+export function ensureSchema(db){
+ if(!db)return Promise.resolve();
+ let pending=schemaChecks.get(db);
+ if(!pending){
+  pending=(async()=>{
+   const info=await db.prepare('PRAGMA table_info(payment_orders)').bind().all();
+   const existing=new Set((info?.results||info||[]).map(c=>c.name));
+   for(const column of lateColumns)if(!existing.has(column)){
+    try{await db.prepare(`ALTER TABLE payment_orders ADD COLUMN ${column} TEXT`).bind().run();}
+    catch(error){if(!/duplicate column/i.test(String(error?.message)))throw error;}
+   }
+  })().catch(error=>{schemaChecks.delete(db);throw error;});
+  schemaChecks.set(db,pending);
+ }
+ return pending;
+}
 const changed=result=>Number(result?.meta?.changes??result?.changes)>0;
 
 export async function saveQuote(db,q,customer=null){const t=now();await db.prepare('INSERT INTO payment_orders (id,quote,customer,created_at,updated_at) VALUES (?,?,?,?,?)').bind(q.id,JSON.stringify(q),customer?JSON.stringify(customer):null,t,t).run();}

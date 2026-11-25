@@ -32,7 +32,7 @@ Si G5 falla, el Worker entrega la última copia correcta de cada listado o ficha
 
 ## Almacenamiento en Cloudflare
 
-Para producción, crea una base D1 y agrega a `wrangler.jsonc` una entrada `d1_databases` con `binding: "PAYMENTS_DB"`, el nombre y el ID reales que entregue Cloudflare. Aplica `migrations/0001_payments.sql` y luego `migrations/0002_customer_events.sql` a esa base (`npx wrangler d1 execute badreason-payments --remote --file migrations/0002_customer_events.sql`). La 0002 debe aplicarse **antes** de desplegar este código: sin ella, guardar una cotización falla. No se inventó un ID ni se creó infraestructura remota en este trabajo.
+Para producción, crea una base D1 y agrega a `wrangler.jsonc` una entrada `d1_databases` con `binding: "PAYMENTS_DB"`, el nombre y el ID reales que entregue Cloudflare. Aplica `migrations/0001_payments.sql` a esa base. Las columnas de `migrations/0002_customer_events.sql` (`customer`, `last_event`, `notified`) las agrega el Worker automáticamente la primera vez que usa la base; aplicar ese archivo a mano es opcional. No se inventó un ID ni se creó infraestructura remota en este trabajo.
 
 Configura los secretos en el Worker mediante el panel de Cloudflare o `wrangler secret put NOMBRE`. Las variables locales no se transfieren automáticamente al Worker. Configura `PUBLIC_ORIGIN` con el origen HTTPS exacto de tu tienda, sin barra final. Repite las pruebas sandbox antes de activar `PAYMENT_MODE=live` y reemplaza las credenciales de prueba por las de producción.
 

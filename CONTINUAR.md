@@ -21,7 +21,7 @@ Repositorio: https://github.com/RamonMansilla/BadReason.cl · Rama: `main` · Si
 - Pagos rechazados, reembolsos y contracargos quedan registrados en D1. Copia de respaldo de G5 cuando el proveedor falla.
 - Banner en WebP: de 41 MB a 1,8 MB. `robots.txt` y `sitemap.xml` generado en el build.
 
-**Pendiente del comercio:** completar `merchant` en `public/data/legal.json` (razón social, RUT, domicilio, correo, plazo de entrega) y revisar los textos legales con un abogado; aplicar `migrations/0002_customer_events.sql` en D1 antes de desplegar; configurar `RESEND_API_KEY`, `MAIL_FROM` y `MERCHANT_EMAIL`.
+**Pendiente del comercio:** completar `merchant` en `public/data/legal.json` (razón social, RUT, domicilio, correo, plazo de entrega) y revisar los textos legales con un abogado; configurar `RESEND_API_KEY`, `MAIL_FROM` y `MERCHANT_EMAIL`.
 
 ## Archivos clave
 
