@@ -12,6 +12,17 @@ Repositorio: https://github.com/RamonMansilla/BadReason.cl · Rama: `main` · Si
 - Integraciones de Mercado Pago, PayPal y transferencia con validación en servidor, SQLite local, migración D1 y webhooks. La activación depende de las credenciales y configuración del comercio; no se han probado cobros reales.
 - Treinta y una pruebas automatizadas pasaron en la última verificación del código.
 
+## Mejoras del 25 de noviembre de 2026
+
+- Checkout en dos pasos: datos de entrega (nombre, correo, teléfono, región, comuna, dirección) y aceptación de términos antes de cotizar; luego solo los métodos habilitados, con el principal destacado. El carrito se vacía al confirmar el pago o registrar una transferencia.
+- Correos automáticos al comprador y al comercio (Resend, opcional).
+- Páginas `/terminos`, `/devoluciones`, `/envios` y `/privacidad`, con enlaces en el pie. Contenido en `public/data/legal.json`.
+- Cabeceras de seguridad (`public/_headers` para páginas, Worker para la API) y límite de solicitudes por IP.
+- Pagos rechazados, reembolsos y contracargos quedan registrados en D1. Copia de respaldo de G5 cuando el proveedor falla.
+- Banner en WebP: de 41 MB a 1,8 MB. `robots.txt` y `sitemap.xml` generado en el build.
+
+**Pendiente del comercio:** completar `merchant` en `public/data/legal.json` (razón social, RUT, domicilio, correo, plazo de entrega) y revisar los textos legales con un abogado; configurar `RESEND_API_KEY`, `MAIL_FROM` y `MERCHANT_EMAIL`.
+
 ## Archivos clave
 
 | Qué cambiar | Archivo |
@@ -24,6 +35,8 @@ Repositorio: https://github.com/RamonMansilla/BadReason.cl · Rama: `main` · Si
 | Lectura del catálogo | `functions/catalog.mjs` |
 | API publicada | `functions/worker.mjs` |
 | Pagos | `functions/payments.mjs` y `PAYMENTS.md` |
+| Datos de entrega, correos, límites | `functions/customer.mjs`, `functions/notify.mjs`, `functions/ratelimit.mjs` |
+| Textos legales y datos del comercio | `public/data/legal.json` |
 | Publicación en .cl | `DESPLIEGUE.md` y `wrangler.jsonc` |
 
 ## Próximo trabajo acordado como idea, todavía no implementado

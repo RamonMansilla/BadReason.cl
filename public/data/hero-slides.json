@@ -9,7 +9,7 @@
     "description": "Air Force 1 '07 Triple White. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-01.png"
+    "image": "/assets/hero/icons/icon-01.webp"
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "description": "Air Force 1 '07 Triple Black. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-02.png"
+    "image": "/assets/hero/icons/icon-02.webp"
   },
   {
     "id": 3,
@@ -33,7 +33,7 @@
     "description": "Shox TL Black Metallic Hematite. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-03.png"
+    "image": "/assets/hero/icons/icon-03.webp"
   },
   {
     "id": 4,
@@ -45,7 +45,7 @@
     "description": "Air Jordan 4 Black Cat. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-04.png"
+    "image": "/assets/hero/icons/icon-04.webp"
   },
   {
     "id": 5,
@@ -57,7 +57,7 @@
     "description": "Air Jordan 3 Black Cat. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-05.png"
+    "image": "/assets/hero/icons/icon-05.webp"
   },
   {
     "id": 6,
@@ -69,7 +69,7 @@
     "description": "Air Jordan 4 Military Black. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-06.png"
+    "image": "/assets/hero/icons/icon-06.webp"
   },
   {
     "id": 7,
@@ -81,7 +81,7 @@
     "description": "Air Jordan 6 Chrome. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-07.png"
+    "image": "/assets/hero/icons/icon-07.webp"
   },
   {
     "id": 8,
@@ -93,7 +93,7 @@
     "description": "Air Jordan 11 Cool Grey. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-08.png"
+    "image": "/assets/hero/icons/icon-08.webp"
   },
   {
     "id": 9,
@@ -105,7 +105,7 @@
     "description": "Air VaporMax Plus Triple Black. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-09.png"
+    "image": "/assets/hero/icons/icon-09.webp"
   },
   {
     "id": 10,
@@ -117,7 +117,7 @@
     "description": "Air Max Plus TN Sunset. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-10.png"
+    "image": "/assets/hero/icons/icon-10.webp"
   },
   {
     "id": 11,
@@ -129,7 +129,7 @@
     "description": "Air Max 270 Triple Black. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-11.png"
+    "image": "/assets/hero/icons/icon-11.webp"
   },
   {
     "id": 12,
@@ -141,7 +141,7 @@
     "description": "Shox TL White Metallic Silver. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-12.png"
+    "image": "/assets/hero/icons/icon-12.webp"
   },
   {
     "id": 13,
@@ -153,7 +153,7 @@
     "description": "Air Jordan 4 White Cement. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-13.png"
+    "image": "/assets/hero/icons/icon-13.webp"
   },
   {
     "id": 14,
@@ -165,7 +165,7 @@
     "description": "Air Jordan 4 Bred. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-14.png"
+    "image": "/assets/hero/icons/icon-14.webp"
   },
   {
     "id": 15,
@@ -177,7 +177,7 @@
     "description": "Dunk Low Panda. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-15.png"
+    "image": "/assets/hero/icons/icon-15.webp"
   },
   {
     "id": 16,
@@ -189,7 +189,7 @@
     "description": "Samba OG Black White Gum. Una silueta reconocible, con el estilo de adidas.",
     "category": "adidas",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-16.png"
+    "image": "/assets/hero/icons/icon-16.webp"
   },
   {
     "id": 17,
@@ -201,7 +201,7 @@
     "description": "Gazelle Blue White. Una silueta reconocible, con el estilo de adidas.",
     "category": "adidas",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-17.png"
+    "image": "/assets/hero/icons/icon-17.webp"
   },
   {
     "id": 18,
@@ -213,7 +213,7 @@
     "description": "Campus 00s Grey White. Una silueta reconocible, con el estilo de adidas.",
     "category": "adidas",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-18.png"
+    "image": "/assets/hero/icons/icon-18.webp"
   },
   {
     "id": 19,
@@ -225,7 +225,7 @@
     "description": "Superstar White Black. Una silueta reconocible, con el estilo de adidas.",
     "category": "adidas",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-19.png"
+    "image": "/assets/hero/icons/icon-19.webp"
   },
   {
     "id": 20,
@@ -237,7 +237,7 @@
     "description": "Stan Smith White Green. Una silueta reconocible, con el estilo de adidas.",
     "category": "adidas",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-20.png"
+    "image": "/assets/hero/icons/icon-20.webp"
   },
   {
     "id": 21,
@@ -249,7 +249,7 @@
     "description": "550 White Green. Una silueta reconocible, con el estilo de New Balance.",
     "category": "New Balance",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-21.png"
+    "image": "/assets/hero/icons/icon-21.webp"
   },
   {
     "id": 22,
@@ -261,7 +261,7 @@
     "description": "990v6 Grey. Una silueta reconocible, con el estilo de New Balance.",
     "category": "New Balance",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-22.png"
+    "image": "/assets/hero/icons/icon-22.webp"
   },
   {
     "id": 23,
@@ -273,7 +273,7 @@
     "description": "2002R Rain Cloud. Una silueta reconocible, con el estilo de New Balance.",
     "category": "New Balance",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-23.png"
+    "image": "/assets/hero/icons/icon-23.webp"
   },
   {
     "id": 24,
@@ -285,7 +285,7 @@
     "description": "9060 Sea Salt. Una silueta reconocible, con el estilo de New Balance.",
     "category": "New Balance",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-24.png"
+    "image": "/assets/hero/icons/icon-24.webp"
   },
   {
     "id": 25,
@@ -297,7 +297,7 @@
     "description": "GEL-NYC Cream Grey. Una silueta reconocible, con el estilo de ASICS.",
     "category": "ASICS",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-25.png"
+    "image": "/assets/hero/icons/icon-25.webp"
   },
   {
     "id": 26,
@@ -309,7 +309,7 @@
     "description": "GEL-KAYANO 14 White Silver. Una silueta reconocible, con el estilo de ASICS.",
     "category": "ASICS",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-26.png"
+    "image": "/assets/hero/icons/icon-26.webp"
   },
   {
     "id": 27,
@@ -321,7 +321,7 @@
     "description": "Chuck 70 Black Egret. Una silueta reconocible, con el estilo de Converse.",
     "category": "Converse",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-27.png"
+    "image": "/assets/hero/icons/icon-27.webp"
   },
   {
     "id": 28,
@@ -333,7 +333,7 @@
     "description": "Old Skool Black White. Una silueta reconocible, con el estilo de Vans.",
     "category": "Vans",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-28.png"
+    "image": "/assets/hero/icons/icon-28.webp"
   },
   {
     "id": 29,
@@ -345,7 +345,7 @@
     "description": "Air Jordan 1 High Chicago. Una silueta reconocible, con el estilo de Jordan.",
     "category": "Jordan",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-29.png"
+    "image": "/assets/hero/icons/icon-29.webp"
   },
   {
     "id": 30,
@@ -357,6 +357,6 @@
     "description": "Air Max 90 Infrared. Una silueta reconocible, con el estilo de Nike.",
     "category": "Nike",
     "group": "urbano",
-    "image": "/assets/hero/icons/icon-30.png"
+    "image": "/assets/hero/icons/icon-30.webp"
   }
 ]

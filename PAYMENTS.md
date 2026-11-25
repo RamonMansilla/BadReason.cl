@@ -12,9 +12,27 @@ Vite guarda los pedidos en `.payments/orders.sqlite`. No se publica esa carpeta 
 
 La transferencia requiere `TRANSFER_DETAILS` con los datos públicos del comercio. Genera una referencia persistente y queda en `pending_manual_review`; mostrar los datos bancarios nunca acredita un abono.
 
+## Datos de entrega y condiciones
+
+Antes de cotizar, el checkout pide nombre, correo, teléfono chileno, región, comuna, dirección e indicaciones opcionales, y exige aceptar términos, devoluciones y envíos. El servidor vuelve a validar todo (`functions/customer.mjs`) y lo guarda en la columna `customer` del pedido. Los datos personales no viajan en el token firmado. La cotización registra la versión de los términos aceptados (`terms`).
+
+Estados del pedido: `quoted`, `creating`, `pending`, `pending_manual_review` (transferencia), `payment_failed` (rechazado o cancelado; el comprador puede reintentar), `paid`, `refunded` y `charged_back`. La columna `last_event` guarda el último estado informado por el proveedor (por ejemplo `cc_rejected_insufficient_amount`).
+
+## Correos de pedido
+
+Con `RESEND_API_KEY`, `MAIL_FROM` y `MERCHANT_EMAIL` configurados, al confirmarse un pago (o al elegir transferencia) se envía un correo al comprador y otro al comercio con productos, total y dirección de entrega. Cada aviso se envía una sola vez aunque el proveedor repita el webhook; si el envío falla, se reintenta en la siguiente notificación. Sin esas variables no se envían correos y el pago funciona igual.
+
+Pasos: crea una cuenta en resend.com, verifica el dominio `badreason.cl` (registros DNS en Cloudflare), crea una clave y guárdala con `wrangler secret put RESEND_API_KEY`. Configura `MAIL_FROM` y `MERCHANT_EMAIL` como variables del Worker.
+
+## Protección contra abuso
+
+`/api/payments/quote` admite 10 solicitudes por minuto e IP, los demás POST de pagos 30 y el resto de la API 240. En Cloudflare se usan los bindings de Rate Limiting declarados en `wrangler.jsonc`; en desarrollo, una ventana en memoria. Al superar el límite se responde 429 con `Retry-After`.
+
+Si G5 falla, el Worker entrega la última copia correcta de cada listado o ficha guardada en la caché de Cloudflare (hasta 7 días) marcada con `stale: true`, y la tienda lo avisa. El precio y la talla se vuelven a confirmar en vivo antes de cobrar.
+
 ## Almacenamiento en Cloudflare
 
-Para producción, crea una base D1 y agrega a `wrangler.jsonc` una entrada `d1_databases` con `binding: "PAYMENTS_DB"`, el nombre y el ID reales que entregue Cloudflare. Aplica `migrations/0001_payments.sql` a esa base. No se inventó un ID ni se creó infraestructura remota en este trabajo.
+Para producción, crea una base D1 y agrega a `wrangler.jsonc` una entrada `d1_databases` con `binding: "PAYMENTS_DB"`, el nombre y el ID reales que entregue Cloudflare. Aplica `migrations/0001_payments.sql` a esa base. Las columnas de `migrations/0002_customer_events.sql` (`customer`, `last_event`, `notified`) las agrega el Worker automáticamente la primera vez que usa la base; aplicar ese archivo a mano es opcional. No se inventó un ID ni se creó infraestructura remota en este trabajo.
 
 Configura los secretos en el Worker mediante el panel de Cloudflare o `wrangler secret put NOMBRE`. Las variables locales no se transfieren automáticamente al Worker. Configura `PUBLIC_ORIGIN` con el origen HTTPS exacto de tu tienda, sin barra final. Repite las pruebas sandbox antes de activar `PAYMENT_MODE=live` y reemplaza las credenciales de prueba por las de producción.
 
