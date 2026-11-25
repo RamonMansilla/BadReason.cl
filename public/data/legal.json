@@ -131,7 +131,7 @@
     ],
     [
      "Con quién los compartimos",
-     "Solo con quienes participan en tu compra: el proveedor de pagos que elijas (Mercado Pago o PayPal), la empresa de despacho, nuestro servicio de correo transaccional y nuestra infraestructura de alojamiento (Cloudflare)."
+     "Solo con quienes participan en tu compra: el proveedor de pagos que elijas (Mercado Pago o PayPal), la empresa de despacho, nuestro servicio de correo transaccional y nuestra infraestructura de alojamiento y estadísticas de visitas (Cloudflare)."
     ],
     [
      "Cuánto tiempo los guardamos",
@@ -142,8 +142,8 @@
      "Puedes pedir acceso, rectificación, supresión u oposición al tratamiento de tus datos escribiéndonos {contact}. Responderemos dentro de los plazos legales."
     ],
     [
-     "Cookies",
-     "No usamos cookies de publicidad ni de analítica de terceros. Solo usamos el almacenamiento de tu navegador para recordar tu carrito y preferencias."
+     "Cookies y estadísticas",
+     "No usamos cookies de publicidad. Medimos visitas con Cloudflare Web Analytics, que no usa cookies ni identifica a las personas. El almacenamiento de tu navegador solo recuerda tu carrito y tus preferencias."
     ]
    ]
   }
