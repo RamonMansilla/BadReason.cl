@@ -75,3 +75,51 @@ header:has(#settings-toggle[aria-expanded="true"]){z-index:80}
 .hero-artwork-slide{opacity:0;animation:hero-artwork-float 6s ease-in-out infinite;transition:opacity .7s ease;will-change:transform,opacity}.hero-artwork-slide:nth-of-type(n){animation-delay:0s}.hero-artwork-slide.is-active{opacity:1}.hero-copy{min-width:0}.hero-copy h1{font-size:clamp(60px,6.4vw,108px);min-height:2.7em}.hero-copy-enter{animation:hero-copy-enter .65s ease both}@keyframes hero-copy-enter{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.hero-index #hero-model{max-width:70%;text-align:right;letter-spacing:1px}@media(max-width:760px){.hero-copy h1{font-size:clamp(52px,10vw,76px);min-height:2.7em}}@media(prefers-reduced-motion:reduce){.hero-artwork-slide{animation:none;transition:none;will-change:auto;opacity:0}.hero-artwork-slide.is-active{opacity:1}.hero-copy-enter{animation:none}}
 /* Manual navigation: swipe, drag, side taps, buttons and keyboard. */
 .hero-artwork{pointer-events:auto;touch-action:pan-y;cursor:grab;outline-offset:8px}.hero-artwork.is-dragging{cursor:grabbing}.hero-artwork-slide,.hero-artwork-halo{pointer-events:none;-webkit-user-drag:none}.hero-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:inherit;font-size:22px;z-index:4;opacity:.8;cursor:pointer}.hero-nav:hover,.hero-nav:focus-visible{opacity:1;background:var(--accent);color:var(--accent-ink)}.hero-nav-prev{left:0}.hero-nav-next{right:0}.hero-index{justify-content:flex-end}.hero-index #hero-model{max-width:100%}@media(max-width:760px){.hero-nav{width:40px;height:40px;font-size:20px}}
+
+/* Checkout: datos de entrega, resultado del pago y páginas legales */
+.shipping-form,.payment-step{border:1px solid var(--line,#ddd);padding:26px;margin-bottom:20px}
+.shipping-form h2,.payment-step h2{display:flex;align-items:center;gap:12px;font-size:24px;letter-spacing:-.8px;margin:0 0 22px}
+.shipping-form h2 span,.payment-step h2 span{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;background:var(--accent,#d8ff35);color:var(--accent-ink,#111);font-size:14px;letter-spacing:0}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.field{display:block;margin-bottom:16px}
+.field>span{display:block;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px}
+.field>span i{font-style:normal;font-weight:400;text-transform:none;letter-spacing:0;color:#777}
+.field input,.field select,.field textarea{display:block;width:100%;max-width:none;margin:0;padding:13px 14px;border:1px solid #bbb;background:#fff;color:inherit;font:inherit;font-size:15px;border-radius:0}
+.field textarea{resize:vertical;min-height:62px}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible,.terms-check input:focus-visible{outline:2px solid var(--focus,#111);outline-offset:2px}
+.field input:user-invalid,.field select:user-invalid{border-color:#c62828}
+.field small{display:block;font-size:11px;color:#777;margin-top:6px}
+.terms-check{display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.6;margin:8px 0 18px;cursor:pointer}
+.terms-check input{width:20px;height:20px;flex-shrink:0;margin:2px 0 0;padding:0;accent-color:#111}
+.terms-check a,.payment-fine a,.legal a,.info details a{text-decoration:underline}
+.form-error{color:#b71c1c;font-size:13px;font-weight:600;margin:0 0 14px}
+.payment-continue{width:100%;margin:0}
+.payment-method.primary{border:2px solid var(--ink,#111);background:var(--accent,#d8ff35);color:var(--accent-ink,#111)}
+.payment-method.primary:not(:disabled):hover{background:var(--accent,#d8ff35);filter:brightness(.96)}
+.delivery-summary{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;font-size:13px;line-height:1.6;background:var(--surface,#f3f3f1);padding:14px 16px;margin-bottom:18px}
+.delivery-summary p{margin:0}
+.text-button{background:none;border:0;padding:4px 0;font:inherit;font-size:12px;font-weight:700;text-decoration:underline;color:inherit;cursor:pointer}
+.payment-sub{display:flex;justify-content:space-between;font-size:13px;margin:12px 0}
+.payment-result{border:1px solid var(--line,#ddd);border-left:4px solid var(--accent,#d8ff35);padding:28px;margin-bottom:20px}
+.payment-result.fail{border-left-color:#c62828}
+.payment-result h2{font-size:30px;letter-spacing:-1px;margin:12px 0 18px}
+.payment-result p{line-height:1.7;font-size:14px}
+.payment-result dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;font-size:14px;margin:0 0 16px}
+.payment-result dt{font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;align-self:center}
+.payment-result dd{margin:0;font-family:ui-monospace,Menlo,monospace;word-break:break-all}
+.payment-result .button{position:static;width:auto;margin:10px 0 0}
+.transfer-details{white-space:pre-wrap;font:inherit;font-size:14px;background:var(--surface,#f3f3f1);padding:14px 16px;margin:0 0 14px}
+.footer-legal{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:11px;margin:-15px 0 30px}
+.footer-legal a{color:inherit;opacity:.75;text-decoration:underline}
+.legal h2{font-size:22px;letter-spacing:-.5px;margin:34px 0 10px}
+.legal p{line-height:1.75;max-width:760px}
+.legal-intro{font-size:17px}
+.merchant-data{display:block;margin-top:10px}
+.legal-nav{display:flex;flex-wrap:wrap;gap:10px 22px;border-top:1px solid var(--line,#ddd);margin-top:40px;padding-top:20px;font-size:13px}
+@media(max-width:640px){.field-grid{grid-template-columns:1fr}.shipping-form,.payment-step,.payment-result{padding:18px}.payment-result h2{font-size:25px}.delivery-summary{flex-direction:column}.footer-legal{margin-top:-10px}}
+[data-mode="dark"] :is(.field input,.field select,.field textarea){background:var(--surface);color:var(--ink);border-color:var(--line)}
+[data-mode="dark"] :is(.field>span i,.field small){color:var(--muted)}
+[data-mode="dark"] .form-error{color:#ff8a80}
+[data-mode="dark"] .terms-check input{accent-color:var(--accent)}
+[data-mode="dark"] .payment-method.primary{border-color:var(--accent);color:var(--accent-ink)}
+[data-mode="dark"] .payment-result.fail{border-left-color:#ff8a80}

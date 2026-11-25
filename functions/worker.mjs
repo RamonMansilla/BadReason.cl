@@ -3,6 +3,50 @@ import { parseCatalog, parseProduct } from './catalog.mjs';
 import { payments } from './payments.mjs';
 import { getBestsellers } from './bestsellers.mjs';
 import { getCollection,productImage } from './collections.mjs';
+import { rateLimit } from './ratelimit.mjs';
+
+// Cabeceras para respuestas generadas por el Worker. Las páginas estáticas las reciben desde public/_headers.
+export const securityHeaders = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
+};
+
+function withSecurity(response) {
+  const secured = new Response(response.body, response);
+  for (const [name, value] of Object.entries(securityHeaders)) {
+    if (name === 'Content-Security-Policy' && !/json|text\/plain/.test(secured.headers.get('Content-Type') || '')) continue;
+    secured.headers.set(name, value);
+  }
+  return secured;
+}
+
+// Copia de respaldo de cada listado de G5 en la caché del centro de datos de Cloudflare.
+// Si G5 falla, se entrega la última copia correcta (hasta 7 días) marcada con stale: true.
+const backupAge = 7 * 24 * 60 * 60;
+const cacheable = path => path === '/catalog' || path === '/search' || path === '/collection' || path === '/bestsellers' || path.startsWith('/product/');
+async function withBackup(request, handler) {
+  const path = new URL(request.url).pathname.replace(/^\/api/, '');
+  const cache = globalThis.caches?.default;
+  if (!cache || request.method !== 'GET' || !cacheable(path)) return handler();
+  const key = new Request(new URL(request.url).href.replace('/api/', '/__g5-backup/'), { method: 'GET' });
+  const response = await handler();
+  if (response.ok) {
+    const copy = new Response(response.clone().body, response);
+    copy.headers.set('Cache-Control', `public, max-age=${backupAge}`);
+    try { await cache.put(key, copy); } catch {}
+    return response;
+  }
+  if (response.status !== 502) return response;
+  try {
+    const saved = await cache.match(key);
+    if (!saved) return response;
+    const data = await saved.json();
+    return json({ ...data, stale: true });
+  } catch { return response; }
+}
 
 const origin = 'https://www.g5sneaker.ru';
 const jsonHeaders = {
@@ -68,10 +112,14 @@ async function api(request) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/api/payments/')) return payments(request, env);
-    if (url.pathname.startsWith('/api/')) return api(request);
+    if (url.pathname.startsWith('/api/payments/')) return withSecurity(await payments(request, env, ctx));
+    if (url.pathname.startsWith('/api/')) {
+      const limited = await rateLimit(request, env, 'api');
+      if (limited) return withSecurity(limited);
+      return withSecurity(await withBackup(request, () => api(request)));
+    }
     return env.ASSETS.fetch(request);
   },
 };

@@ -18,6 +18,11 @@
       "database_id": "7c2143df-a8c0-41e0-b4a6-74a11f24dbe8"
     }
   ],
+  "ratelimits": [
+    { "name": "QUOTE_LIMITER", "namespace_id": "2611001", "simple": { "limit": 10, "period": 60 } },
+    { "name": "PAYMENT_LIMITER", "namespace_id": "2611002", "simple": { "limit": 30, "period": 60 } },
+    { "name": "API_LIMITER", "namespace_id": "2611003", "simple": { "limit": 240, "period": 60 } }
+  ],
   "keep_vars": true,
   "observability": { "enabled": true }
 }

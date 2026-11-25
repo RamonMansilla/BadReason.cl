@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /pago
+Disallow: /carrito
+
+Sitemap: https://badreason.cl/sitemap.xml

@@ -1,0 +1,151 @@
+{
+ "version": "2026-11-25",
+ "merchant": {
+  "_instrucciones": "Completa estos datos antes de vender. Se muestran en las páginas legales y en el pie de página. Deja vacío lo que no aplique.",
+  "brand": "Badreason",
+  "legalName": "",
+  "rut": "",
+  "address": "",
+  "email": "",
+  "phone": "",
+  "deliveryEstimate": ""
+ },
+ "pages": {
+  "terminos": {
+   "title": "Términos y condiciones",
+   "eyebrow": "BADREASON / CONDICIONES DE COMPRA",
+   "intro": "Estas condiciones rigen las compras en badreason.cl. Al confirmar un pedido declaras haberlas leído y aceptado. Se aplican la Ley 19.496 sobre Protección de los Derechos de los Consumidores y su reglamento de comercio electrónico.",
+   "sections": [
+    [
+     "Quiénes somos",
+     "Badreason es una tienda en línea de calzado y ropa deportiva. Seleccionamos productos del catálogo de un proveedor internacional y los vendemos en pesos chilenos. {merchant}"
+    ],
+    [
+     "Productos, tallas y disponibilidad",
+     "Las fotografías, descripciones y tallas provienen del catálogo del proveedor. Antes de cobrar volvemos a confirmar precio, talla y disponibilidad. Si después del pago el proveedor no puede entregar un producto, te avisaremos y te devolveremos el 100 % de lo pagado por ese producto, o te ofreceremos un cambio si lo prefieres."
+    ],
+    [
+     "Precios y total",
+     "Los precios se muestran en pesos chilenos (CLP). El total que pagas es el que se confirma en el checkout: productos más despacho. Si surgiera un costo adicional que no estaba incluido, como un cargo de importación, te lo informaremos antes de despachar; si no lo aceptas, anulamos el pedido y te devolvemos todo lo pagado. Con PayPal el cobro se realiza en dólares (USD) según la conversión mostrada antes de pagar."
+    ],
+    [
+     "Confirmación del pedido",
+     "Al confirmar tus datos de entrega se genera un número de pedido. La compra queda confirmada cuando el proveedor de pagos aprueba el pago. Si eliges transferencia, el pedido queda pendiente hasta que verifiquemos el abono; si no lo recibimos dentro de 48 horas, el pedido se anula. Cuando el envío de correos está habilitado, recibirás la confirmación en el correo que ingresaste."
+    ],
+    [
+     "Medios de pago",
+     "Aceptamos los medios que aparecen habilitados en el checkout (Mercado Pago, PayPal o transferencia bancaria). Los datos de tu tarjeta se ingresan directamente en el proveedor de pagos: Badreason nunca recibe ni guarda números de tarjeta, CVV ni contraseñas bancarias."
+    ],
+    [
+     "Despacho",
+     "Las condiciones de cobertura, costo y plazos están en <a href=\"/envios\">Envíos y despacho</a>."
+    ],
+    [
+     "Retracto, cambios y garantía",
+     "Tus derechos de retracto, cambio y garantía legal están en <a href=\"/devoluciones\">Cambios, devoluciones y garantía</a>."
+    ],
+    [
+     "Datos personales",
+     "El uso de tus datos se explica en la <a href=\"/privacidad\">Política de privacidad</a>."
+    ],
+    [
+     "Contacto y reclamos",
+     "Para consultas o reclamos escríbenos {contact} indicando tu número de pedido. También puedes acudir al Servicio Nacional del Consumidor (SERNAC) en <a href=\"https://www.sernac.cl\" rel=\"noopener\" target=\"_blank\">sernac.cl</a>."
+    ],
+    [
+     "Cambios a estas condiciones",
+     "Podemos actualizar estas condiciones. Cada pedido se rige por la versión vigente al momento de la compra, que queda registrada con el pedido. Versión vigente: {version}."
+    ]
+   ]
+  },
+  "devoluciones": {
+   "title": "Cambios, devoluciones y garantía",
+   "eyebrow": "BADREASON / POSTVENTA",
+   "intro": "Queremos que compres tranquilo. Estos son tus derechos y cómo ejercerlos.",
+   "sections": [
+    [
+     "Derecho a retracto: 10 días",
+     "Puedes arrepentirte de tu compra dentro de 10 días corridos desde que recibes el producto, conforme al artículo 3 bis de la Ley 19.496. El producto debe estar sin uso, con sus etiquetas y en su caja original. Te devolvemos todo lo que pagaste, incluido el despacho original, sin retener gastos, a la brevedad y a más tardar dentro de 45 días desde que nos comunicas el retracto. El envío de vuelta corre por tu cuenta, salvo que el producto tenga una falla o no corresponda a lo que compraste."
+    ],
+    [
+     "Garantía legal: 6 meses",
+     "Si el producto presenta una falla o no corresponde a lo comprado, dentro de 6 meses desde que lo recibes puedes elegir entre cambio, reparación o devolución del dinero, como establece la Ley 19.496. En estos casos nosotros pagamos los costos de envío."
+    ],
+    [
+     "Cambio de talla",
+     "Si la talla no te queda, escríbenos dentro del plazo de retracto. El cambio depende de la disponibilidad del proveedor; te informaremos cualquier costo de despacho antes de confirmarlo."
+    ],
+    [
+     "Cómo solicitarlo",
+     "Escríbenos {contact} con tu número de pedido, el motivo y, si hay una falla, fotografías del producto. Te responderemos con las instrucciones de envío."
+    ],
+    [
+     "Reembolsos",
+     "Reembolsamos por el mismo medio de pago. Mercado Pago y PayPal acreditan según sus propios plazos; las transferencias se devuelven a la cuenta que nos indiques a tu nombre."
+    ]
+   ]
+  },
+  "envios": {
+   "title": "Envíos y despacho",
+   "eyebrow": "BADREASON / DESPACHO",
+   "intro": "Así llegamos con tu pedido.",
+   "sections": [
+    [
+     "Cobertura",
+     "Despachamos a todas las regiones de Chile, a la dirección que ingresas en el checkout. Revisa que la calle, número, comuna y teléfono estén correctos."
+    ],
+    [
+     "Costo",
+     "El despacho cuesta $6.000 CLP por pedido y es gratis cuando el subtotal de productos supera $50.000 CLP. El costo exacto se muestra en el checkout antes de pagar."
+    ],
+    [
+     "Plazos",
+     "{delivery}"
+    ],
+    [
+     "Seguimiento",
+     "Cuando tu pedido sea despachado te enviaremos el número de seguimiento al correo o teléfono que ingresaste."
+    ],
+    [
+     "Recepción",
+     "Al recibir, revisa que el paquete esté en buen estado. Si llega dañado o con un producto distinto, escríbenos {contact} lo antes posible con fotografías y tu número de pedido."
+    ]
+   ]
+  },
+  "privacidad": {
+   "title": "Política de privacidad",
+   "eyebrow": "BADREASON / PRIVACIDAD",
+   "intro": "Usamos tus datos solo para venderte y entregarte tu pedido, conforme a la Ley 19.628 sobre protección de la vida privada y a la Ley 21.719 de protección de datos personales.",
+   "sections": [
+    [
+     "Responsable",
+     "{merchant}"
+    ],
+    [
+     "Qué datos recopilamos",
+     "Al comprar: nombre, correo, teléfono, dirección de entrega e indicaciones, los productos del pedido y las referencias del pago (no los datos de tu tarjeta). Al navegar: tu carrito, idioma y apariencia se guardan solo en tu navegador. Tu dirección IP se usa de forma temporal para proteger la tienda de abusos."
+    ],
+    [
+     "Para qué los usamos",
+     "Para procesar y entregar tu pedido, enviarte avisos sobre él, atender cambios y reclamos, cumplir obligaciones legales y tributarias, y prevenir fraudes. No vendemos tus datos ni los usamos para publicidad."
+    ],
+    [
+     "Con quién los compartimos",
+     "Solo con quienes participan en tu compra: el proveedor de pagos que elijas (Mercado Pago o PayPal), la empresa de despacho, nuestro servicio de correo transaccional y nuestra infraestructura de alojamiento (Cloudflare)."
+    ],
+    [
+     "Cuánto tiempo los guardamos",
+     "Mientras sea necesario para tu pedido y su garantía, y después durante los plazos que exige la ley, por ejemplo para fines tributarios."
+    ],
+    [
+     "Tus derechos",
+     "Puedes pedir acceso, rectificación, supresión u oposición al tratamiento de tus datos escribiéndonos {contact}. Responderemos dentro de los plazos legales."
+    ],
+    [
+     "Cookies",
+     "No usamos cookies de publicidad ni de analítica de terceros. Solo usamos el almacenamiento de tu navegador para recordar tu carrito y preferencias."
+    ]
+   ]
+  }
+ }
+}
