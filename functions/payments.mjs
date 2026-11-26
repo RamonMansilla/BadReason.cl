@@ -35,7 +35,11 @@ async function applyMercadoPayment(env,p,ctx){
  if(p.currency_id!=='CLP'||Number(p.transaction_amount)!==q.total||p.live_mode!==(env.PAYMENT_MODE==='live'))fail('El pago no corresponde a esta compra.',409);
  await recordEvent(env.PAYMENTS_DB,q.id,{provider:'mercadopago',payment:String(p.id),status:String(p.status||''),detail:String(p.status_detail||'')});
  if(p.status==='approved'){
-  await markPaid(env.PAYMENTS_DB,q.id,order.provider_id,p.id);
+  // Si el pedido quedó sin provider_id (falló el guardado tras crear la preferencia), el pago ya verificado
+  // por API (referencia, monto, moneda y modo) igual se registra, con un identificador de recuperación.
+  let providerId=order.provider_id;
+  if(!providerId){providerId='recovered-'+p.id;await updateOrder(env.PAYMENTS_DB,q.id,{provider_id:providerId});}
+  await markPaid(env.PAYMENTS_DB,q.id,providerId,p.id);
   const current=await getOrder(env.PAYMENTS_DB,q.id);
   if(current?.status==='paid'){await later(ctx,notifyOrder(env,q.id,'paid'));return {status:'paid',reference:q.id,receipt:current.receipt};}
  }
@@ -132,9 +136,11 @@ export async function payments(request,env,ctx){try{
   if(!await claimProvider(env.PAYMENTS_DB,q.id,body.provider))fail('Este pedido ya se inició con otro método o ya está pagado.',409);
   if(body.provider==='transfer'){await updateOrder(env.PAYMENTS_DB,q.id,{provider:'transfer',status:'pending_manual_review'});await later(ctx,notifyOrder(env,q.id,'transfer'));return reply({status:'pending_manual_review',reference:q.id,details:env.TRANSFER_DETAILS,total:q.total,email:config.email});}
   if(order.redirect&&order.provider_id)return reply({redirect:order.redirect,token:await sign({...q,provider:order.provider,providerId:order.provider_id},env.PAYMENT_SECRET)});
+  if(body.provider==='mercadopago'&&env.PAYMENT_MODE==='live'&&!origin.startsWith('https:'))fail('Para cobrar en modo real la tienda debe usar HTTPS (PUBLIC_ORIGIN).',503);
   await updateOrder(env.PAYMENTS_DB,q.id,{provider:body.provider,status:'creating'});
   let customer=null;try{customer=JSON.parse(order.customer||'null');}catch{}
   let result,redirect,providerId;
+  try{
   if(body.provider==='mercadopago'){
    result=await remote('https://api.mercadopago.com/checkout/preferences',{method:'POST',headers:{Authorization:'Bearer '+env.MP_ACCESS_TOKEN,'Content-Type':'application/json','X-Idempotency-Key':q.id},body:JSON.stringify({items:q.items.map(i=>({id:i.id,title:i.name+' / '+i.options.join(' / '),quantity:i.qty,currency_id:'CLP',unit_price:i.price})).concat(q.shipping?[{title:'Despacho',quantity:1,currency_id:'CLP',unit_price:q.shipping}]:[]),external_reference:q.id,statement_descriptor:'BADREASON',...(env.PAYMENT_MODE==='live'&&customer?{payer:{name:customer.name,email:customer.email}}:{}),back_urls:{success:origin+'/pago?return=mercadopago',pending:origin+'/pago?return=mercadopago',failure:origin+'/pago?return=mercadopago'},...(origin.startsWith('https:')?{auto_return:'approved',notification_url:origin+'/api/payments/webhooks/mercadopago'}:{})})});
    redirect=env.PAYMENT_MODE==='live'?result.init_point:result.sandbox_init_point;providerId=result.id;
@@ -142,6 +148,7 @@ export async function payments(request,env,ctx){try{
    result=await paypal(env,'/v2/checkout/orders',{intent:'CAPTURE',purchase_units:[{reference_id:q.id,custom_id:q.id,amount:{currency_code:'USD',value:q.usd}}],payment_source:{paypal:{experience_context:{user_action:'PAY_NOW',return_url:origin+'/pago?return=paypal',cancel_url:origin+'/pago?cancel=1'}}}},q.id);providerId=result.id;redirect=result.links?.find(l=>['payer-action','approve'].includes(l.rel))?.href;
   }
   if(!redirect||!/^https:\/\//.test(redirect))fail('El proveedor no devolvió una dirección de pago.',502);
+  }catch(error){await setStatusUnlessPaid(env.PAYMENTS_DB,q.id,'quoted');throw error;}
   await updateOrder(env.PAYMENTS_DB,q.id,{provider:body.provider,provider_id:String(providerId),redirect,status:'pending'});
   return reply({redirect,token:await sign({...q,provider:body.provider,providerId},env.PAYMENT_SECRET)});
  }
